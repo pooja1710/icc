@@ -3,7 +3,7 @@
 <html lang="en">
 
 <head>
-	<title>ICrazyCupid</title>
+	<title>iCrazyCupid</title>
 	<link rel="shortcut icon" href="images/top-arrow.png" />
 	<!-- Meta tag Keywords -->
 	<meta name="viewport" content="width=device-width, initial-scale=1">
@@ -295,7 +295,7 @@
   }
 }
 
-@-keyframes swayWays {
+@keyframes swayWays {
   0% {
     transform: rotate(12deg);
     left:-0.3%;
@@ -581,7 +581,8 @@ http://static.indigoimages.ca/2016/shop/113439_img25_twotoneheart.png) no-repeat
 
     <div class="field">
       <div class="control">
-        <input type="submit" href="login.html" name="commit" value="Send to the love!" id="send_to_the_future" class="button is-primary fm-button w-100 fullspectrum-gradient animate-background tc db" data-disable-with="Send to the Love!">
+        <input type="submit" onclick="fsignin()"  name="commit" value="Send to the love!" id="send_to_the_future" class="button is-primary fm-button w-100 fullspectrum-gradient animate-background tc db" >
+		
       </div>
 <!--       <p class="help is-info">You will receive a confirmation email. By writing a letter and signing up for FutureMe you agree to the <a href="https://www.futureme.org/legal" target="_new">terms and conditions.</a></p> -->
     </div>
@@ -841,6 +842,65 @@ http://static.indigoimages.ca/2016/shop/113439_img25_twotoneheart.png) no-repeat
 	<!-- //smooth scrolling -->
 		</div>
 	</div>
+   
+<script src="https://www.gstatic.com/firebasejs/4.6.2/firebase.js"></script>
+<script>
+  // Initialize Firebase
+  var config = {
+    apiKey: "AIzaSyBV6hOK7fLbCz4NExdXWGH2XzlEI_8DbRM",
+    authDomain: "icrazycupid-e5f45.firebaseapp.com",
+    databaseURL: "https://icrazycupid-e5f45.firebaseio.com",
+    projectId: "icrazycupid-e5f45",
+    storageBucket: "icrazycupid-e5f45.appspot.com",
+    messagingSenderId: "583557891897"
+  };
+  firebase.initializeApp(config);
+	
+	function gsignin(){
+		var provider = new firebase.auth.GoogleAuthProvider();
+		firebase.auth().signInWithPopup(provider).then(function(result) {
+  // This gives you a Google Access Token. You can use it to access the Google API.
+  var token = result.credential.accessToken;
+  // The signed-in user info.
+  var user = result.user;
+  // ...
+}).catch(function(error) {
+  // Handle Errors here.
+  var errorCode = error.code;
+  var errorMessage = error.message;
+	console.log(errorCode);
+  // The email of the user's account used.
+  var email = error.email;
+  // The firebase.auth.AuthCredential type that was used.
+  var credential = error.credential;
+  // ...
+});
+	}
+
+	function fsignin(){
+		var provider = new firebase.auth.FacebookAuthProvider();
+		firebase.auth().signInWithPopup(provider).then(function(result) {
+  // This gives you a Facebook Access Token. You can use it to access the Facebook API.
+  var token = result.credential.accessToken;
+  // The signed-in user info.
+  var user = result.user;
+  // ...
+}).catch(function(error) {
+  // Handle Errors here.
+  var errorCode = error.code;
+  var errorMessage = error.message;
+  // The email of the user's account used.
+  var email = error.email;
+	console.log(errorCode);
+  // The firebase.auth.AuthCredential type that was used.
+  var credential = error.credential;
+  // ...
+});
+
+	}
+</script>
+
+
 
 
 </body>
